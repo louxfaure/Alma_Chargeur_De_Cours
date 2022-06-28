@@ -7,12 +7,14 @@ import pysftp
 
 #Init logger
 logger = logging.getLogger("__main__.{}".format(__name__))
+cnopts = pysftp.CnOpts()
+cnopts.hostkeys = None
 
 # Récupération des fichiers
 def load_file(remote_file_path_in,local_file_path_in):
     try :
         # Connexion au serveur
-        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW")) as sftp:
+        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW"),cnopts=cnopts) as sftp:
             logger.info("Récupération des fichiers::Connexion au serveur ftp ok")
             file_list = sftp.listdir(remote_file_path_in)
             try : 
@@ -34,7 +36,7 @@ def load_file(remote_file_path_in,local_file_path_in):
 def put_file(institutions_list,local_file_path_out, remote_file_path_out,local_file_path_in,remote_file_path_archive,remote_file_path_in):
     try :
         # Connexion au serveur
-        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW")) as sftp:
+        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW"),cnopts=cnopts) as sftp:
             # Transfert des fichiers formatés vers le serveurs
             for inst in institutions_list :
                 try :
