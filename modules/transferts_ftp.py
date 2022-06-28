@@ -28,7 +28,6 @@ def load_file(remote_file_path_in,local_file_path_in):
             return "Success",file_list
     except Exception as e:
         logger.error("Récupération des fichiers::Impossible de se connecter au serveur ftp::{}".format(str(e)))
-        sftp.close()
         return "Error", str(e)
 
 #Transfert des fichiers à charger, Archivage et suppression des fihiers source sur le ftp
@@ -60,5 +59,4 @@ def put_file(institutions_list,local_file_path_out, remote_file_path_out,local_f
             return "Success"
     except Exception as e:
         logger.error("Dépôt des fichiers traités::Impossible de se connecter au serveur ftp::{}".format(str(e)))
-        sftp.close()
         return "Error"

@@ -26,7 +26,6 @@ REGLES_FILTRAGE_SUR_DEPT = {
     }
 
 #On initialise le logger
-# logs.init_logs(LOGS_FILE,'DEBUG')
 logs.setup_logging(name=APP_NAME, level=LOGS_LEVEL,log_dir=LOGS_FILE)
 logger = logging.getLogger(__name__)
 logger.debug(LOGS_FILE)
@@ -60,7 +59,7 @@ if len(file_list) == 0 :
     exit()
  
 for file in file_list :
-    # R2cupération  des paramètres des sous traitements à partir du nom des fichiers
+    # Récupération  des paramètres des sous traitements à partir du nom des fichiers
     file_name = re.findall('^(.*?)_(.*?)_(.*?)_(.*?)\..*', file)
     institution= file_name[0][0]
     plateforme = file_name[0][1]
