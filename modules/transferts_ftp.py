@@ -39,6 +39,12 @@ def put_file(institutions_list,local_file_path_out, remote_file_path_out,local_f
         with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW"),cnopts=cnopts) as sftp:
             # Transfert des fichiers formatés vers le serveurs
             for inst in institutions_list :
+                # Suppression des fichiers existants
+                sftp.chdir("{}/{}".format(remote_file_path_out,inst))
+                file_list = sftp.listdir()
+                for file in file_list :
+                    sftp.remove(file)
+                #Dépôt des fichiers
                 try :
                     sftp.put_r("{}/{}".format(local_file_path_out,inst),"{}/{}".format(remote_file_path_out,inst),confirm=False,preserve_mtime=True)    
                 except Exception as e:
