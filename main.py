@@ -28,7 +28,7 @@ REGLES_FILTRAGE_SUR_DEPT = {
 #On initialise le logger
 logs.setup_logging(name=APP_NAME, level=LOGS_LEVEL,log_dir=LOGS_FILE)
 logger = logging.getLogger(__name__)
-logger.debug(LOGS_FILE)
+logger.info(os.getenv("SFTP_UB_HOSTNAME"))
 
 def envoie_rapport_traitement():
     logger.debug(NB_ERROR)
