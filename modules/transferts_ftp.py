@@ -14,7 +14,7 @@ cnopts.hostkeys = None
 def load_file(remote_file_path_in,local_file_path_in):
     try :
         # Connexion au serveur
-        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW"),cnopts=cnopts) as sftp:
+        with pysftp.Connection(host=os.getenv("SFTP_UB_HOSTNAME"), username=os.getenv("SFTP_UB_LOGIN"), password=os.getenv("SFTP_UB_PW"),cnopts=cnopts,log=True) as sftp:
             logger.info("Récupération des fichiers::Connexion au serveur ftp ok")
             file_list = sftp.listdir(remote_file_path_in)
             try : 
