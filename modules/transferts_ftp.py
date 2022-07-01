@@ -7,8 +7,9 @@ import pysftp
 
 #Init logger
 logger = logging.getLogger("__main__.{}".format(__name__))
-cnopts = pysftp.CnOpts()
-cnopts.hostkeys = None
+cnopts = pysftp.CnOpts(knownhosts=os.getenv('KNOWN_HOSTS'))
+# cnopts = pysftp.CnOpts()
+# cnopts.hostkeys = None
 
 # Récupération des fichiers
 def load_file(remote_file_path_in,local_file_path_in):
